@@ -1,0 +1,197 @@
+.newAppointmentPage {
+  --booking-primary: #178447;
+  --booking-primary-dark: #0f6032;
+  --booking-primary-soft: #e8f6ed;
+  --booking-text: #19241d;
+  --booking-muted: #657169;
+  --booking-border: #c8d8cc;
+
+  width: min(100%, 820px);
+  margin: 0 auto;
+}
+
+.newAppointmentTitle {
+  margin: 0 0 1.25rem;
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  background: var(--booking-primary-dark);
+  border-left: 6px solid #7ee2a2;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+  box-shadow: 0 12px 30px rgba(20, 52, 33, 0.1);
+}
+
+.appointmentForm {
+  width: 100%;
+  margin: 0 0 clamp(2rem, 5vw, 4rem);
+  padding: clamp(1.15rem, 4vw, 2rem);
+  display: grid;
+  grid-template-columns: minmax(130px, 0.32fr) minmax(0, 1fr);
+  gap: 1rem 1.25rem;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #d8e4db;
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(20, 52, 33, 0.09);
+}
+
+.appointmentForm label {
+  color: var(--booking-text);
+  font-size: 0.9rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.appointmentForm select,
+.appointmentForm input,
+.appointmentForm textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0.72rem 0.85rem;
+  border: 1px solid var(--booking-border);
+  border-radius: 6px;
+  outline: none;
+  background: #fbfdfb;
+  color: var(--booking-text);
+  font: inherit;
+  font-size: 0.94rem;
+  line-height: 1.4;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.appointmentForm textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.appointmentForm select:hover:not(:disabled),
+.appointmentForm input:hover,
+.appointmentForm textarea:hover {
+  border-color: #8eaf98;
+}
+
+.appointmentForm select:focus,
+.appointmentForm input:focus,
+.appointmentForm textarea:focus {
+  border-color: var(--booking-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(23, 132, 71, 0.14);
+}
+
+.appointmentForm select:disabled {
+  border-color: #d9e1db;
+  background: #eef2ef;
+  color: #89948c;
+  cursor: not-allowed;
+}
+
+.appointmentForm input[readonly] {
+  border-color: #c9d9cd;
+  background: var(--booking-primary-soft);
+  color: var(--booking-primary-dark);
+  font-weight: 700;
+  cursor: default;
+}
+
+.appointmentForm option:disabled {
+  color: #a33842;
+}
+
+.appointmentForm p[role="alert"] {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.8rem 1rem;
+  border: 1px solid #ecc3c7;
+  border-left: 4px solid #bd3b46;
+  border-radius: 6px;
+  background: #fff5f6;
+  color: #8e2630;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.appointmentForm button {
+  grid-column: 1 / -1;
+  justify-self: end;
+  min-width: min(100%, 220px);
+  min-height: 46px;
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--booking-primary);
+  border-radius: 6px;
+  background: var(--booking-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 750;
+  line-height: 1.25;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(23, 132, 71, 0.2);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.appointmentForm button:hover:not(:disabled) {
+  border-color: var(--booking-primary-dark);
+  background: var(--booking-primary-dark);
+  box-shadow: 0 9px 22px rgba(15, 96, 50, 0.24);
+  transform: translateY(-1px);
+}
+
+.appointmentForm button:focus-visible {
+  outline: 3px solid #9cdbb2;
+  outline-offset: 3px;
+}
+
+.appointmentForm button:disabled {
+  border-color: #91aa99;
+  background: #91aa99;
+  box-shadow: none;
+  cursor: wait;
+}
+
+@media (max-width: 620px) {
+  .newAppointmentTitle {
+    padding: 1.1rem;
+  }
+
+  .appointmentForm {
+    padding: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+  }
+
+  .appointmentForm select,
+  .appointmentForm input,
+  .appointmentForm textarea {
+    margin-bottom: 0.7rem;
+  }
+
+  .appointmentForm button {
+    grid-column: 1;
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appointmentForm select,
+  .appointmentForm input,
+  .appointmentForm textarea,
+  .appointmentForm button {
+    transition: none;
+  }
+
+  .appointmentForm button:hover:not(:disabled) {
+    transform: none;
+  }
+}

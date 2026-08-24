@@ -1,0 +1,391 @@
+:root {
+  --pets-primary: #178447;
+  --pets-primary-dark: #0f6032;
+  --pets-primary-soft: #e8f6ed;
+  --pets-surface: #ffffff;
+  --pets-background: #f2f7f4;
+  --pets-text: #18231d;
+  --pets-muted: #65736a;
+  --pets-border: #d7e4db;
+  --pets-danger: #bd3b46;
+  --pets-danger-soft: #fff4f5;
+  --pets-shadow: 0 12px 32px rgba(20, 52, 33, 0.09);
+}
+
+.headerSection {
+  width: min(100%, 1180px);
+  margin: 0 auto 1.25rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  overflow: hidden;
+  background: var(--pets-primary-dark);
+  border-left: 6px solid #7ee2a2;
+  border-radius: 8px;
+  color: #ffffff;
+  box-shadow: var(--pets-shadow);
+}
+
+.headerSection h3 {
+  margin: 0;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.headerSection br {
+  display: none;
+}
+
+.kertForm {
+  width: min(100%, 1180px);
+  margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(1.1rem, 3vw, 2rem);
+  display: grid;
+  grid-template-columns: max-content minmax(180px, 1fr) max-content minmax(180px, 1fr);
+  gap: 1rem 0.85rem;
+  align-items: center;
+  background: var(--pets-surface);
+  border: 1px solid var(--pets-border);
+  border-radius: 8px;
+  box-shadow: var(--pets-shadow);
+}
+
+.kertForm label {
+  color: var(--pets-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.kertForm input,
+.kertForm select,
+.kertForm textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #bdcec2;
+  border-radius: 6px;
+  outline: none;
+  background: #fbfdfb;
+  color: var(--pets-text);
+  font: inherit;
+  font-size: 0.94rem;
+  line-height: 1.35;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.kertForm input:hover,
+.kertForm select:hover,
+.kertForm textarea:hover {
+  border-color: #88ac94;
+}
+
+.kertForm input:focus,
+.kertForm select:focus,
+.kertForm textarea:focus {
+  border-color: var(--pets-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(23, 132, 71, 0.14);
+}
+
+.kertForm input[readonly] {
+  border-color: #c9d9cd;
+  background: var(--pets-primary-soft);
+  color: var(--pets-primary-dark);
+  font-weight: 700;
+  cursor: default;
+}
+
+.kertForm input[type="file"] {
+  padding: 0.35rem;
+  background: var(--pets-primary-soft);
+  color: var(--pets-muted);
+  cursor: pointer;
+}
+
+.kertForm input[type="file"]::file-selector-button {
+  min-height: 34px;
+  margin-right: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border: 0;
+  border-radius: 5px;
+  background: var(--pets-primary-dark);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 160ms ease;
+}
+
+.kertForm input[type="file"]::file-selector-button:hover {
+  background: var(--pets-primary);
+}
+
+#submitBTN {
+  grid-column: 1 / -1;
+  justify-self: end;
+  min-width: min(100%, 230px);
+  min-height: 46px;
+  margin-top: 0.35rem;
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--pets-primary);
+  border-radius: 6px;
+  background: var(--pets-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(23, 132, 71, 0.2);
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+#submitBTN:hover:not(:disabled) {
+  border-color: var(--pets-primary-dark);
+  background: var(--pets-primary-dark);
+  box-shadow: 0 9px 22px rgba(15, 96, 50, 0.24);
+  transform: translateY(-1px);
+}
+
+#submitBTN:disabled {
+  border-color: #91aa99;
+  background: #91aa99;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+#submitBTN:focus-visible,
+.gardenCard button:focus-visible {
+  outline: 3px solid #a6e5bc;
+  outline-offset: 2px;
+}
+
+.petsSection {
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  padding: 0 0 clamp(1rem, 3vw, 2.5rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 320px);
+  gap: clamp(1rem, 2vw, 1.4rem);
+  align-items: stretch;
+  justify-content: center;
+}
+
+.gardenCard {
+  width: 100%;
+  max-width: 320px;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.15rem 1.15rem;
+  background: var(--pets-surface);
+  border: 1px solid var(--pets-border);
+  border-top: 3px solid var(--pets-primary);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(20, 52, 33, 0.08);
+  color: var(--pets-text);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.gardenCard:hover {
+  transform: translateY(-4px);
+  border-color: #9bcaaa;
+  box-shadow: 0 15px 34px rgba(20, 52, 33, 0.13);
+}
+
+.gardenCard img {
+  width: calc(100% + 2.3rem);
+  height: 220px;
+  margin: 0 -1.15rem 1rem;
+  display: block;
+  object-fit: cover;
+  background: #e7eee9;
+  border-bottom: 1px solid var(--pets-border);
+}
+
+.gardenCard h2 {
+  margin: 0 0 0.65rem;
+  color: var(--pets-text);
+  font-size: 1.35rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.gardenCard p {
+  min-width: 0;
+  margin: 0;
+  padding: 0.52rem 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.8rem;
+  border-bottom: 1px solid #edf2ee;
+  color: var(--pets-text);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.gardenCard p::before {
+  flex: 0 0 auto;
+  color: var(--pets-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.gardenCard p:nth-of-type(1)::before {
+  content: "Faj";
+}
+
+.gardenCard p:nth-of-type(2)::before {
+  content: "Fajta";
+}
+
+.gardenCard p:nth-of-type(3)::before {
+  content: "Szuletesi datum";
+}
+
+.gardenCard p:nth-of-type(4)::before {
+  content: "Chipszam";
+}
+
+.gardenCard button {
+  width: 100%;
+  min-height: 43px;
+  margin-top: 0.7rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--pets-primary);
+  border-radius: 6px;
+  background: var(--pets-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.25;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.gardenCard button:first-of-type {
+  margin-top: auto;
+}
+
+.gardenCard button:hover {
+  border-color: var(--pets-primary-dark);
+  background: var(--pets-primary-dark);
+  box-shadow: 0 6px 15px rgba(23, 132, 71, 0.2);
+  transform: translateY(-1px);
+}
+
+.gardenCard button:last-of-type {
+  border-color: #edc3c7;
+  background: var(--pets-danger-soft);
+  color: var(--pets-danger);
+}
+
+.gardenCard button:last-of-type:hover {
+  border-color: var(--pets-danger);
+  background: var(--pets-danger);
+  color: #ffffff;
+  box-shadow: 0 6px 15px rgba(189, 59, 70, 0.18);
+}
+
+.errText {
+  grid-column: 1 / -1;
+  width: min(100%, 680px);
+  margin: clamp(1.5rem, 6vw, 4rem) auto;
+  padding: clamp(1.15rem, 4vw, 2rem);
+  border: 1px solid #b7dbc1;
+  border-left: 4px solid var(--pets-primary);
+  border-radius: 8px;
+  background: var(--pets-surface);
+  box-shadow: var(--pets-shadow);
+  color: var(--pets-primary-dark);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  line-height: 1.5;
+  text-align: center;
+  letter-spacing: 0;
+}
+
+@media (max-width: 940px) {
+  .kertForm {
+    grid-template-columns: max-content minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 620px) {
+  .headerSection {
+    padding: 1.15rem;
+  }
+
+  .kertForm {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.4rem;
+    padding: 1rem;
+  }
+
+  .kertForm input,
+  .kertForm select,
+  .kertForm textarea {
+    margin-bottom: 0.65rem;
+  }
+
+  #submitBTN {
+    grid-column: 1;
+    width: 100%;
+    margin-top: 0.25rem;
+  }
+
+  .petsSection {
+    grid-template-columns: 1fr;
+  }
+
+  .gardenCard {
+    width: min(100%, 340px);
+    max-width: 340px;
+    justify-self: center;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+  }
+
+  .gardenCard img {
+    width: calc(100% + 2rem);
+    margin-right: -1rem;
+    margin-left: -1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #submitBTN,
+  .gardenCard,
+  .gardenCard button {
+    transition: none;
+  }
+
+  #submitBTN:hover,
+  .gardenCard:hover,
+  .gardenCard button:hover {
+    transform: none;
+  }
+}

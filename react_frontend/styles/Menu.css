@@ -1,0 +1,256 @@
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+  padding: 0;
+  background: #ffffff;
+  border-bottom: 1px solid #d9e5dc;
+  box-shadow: 0 5px 20px rgba(19, 55, 33, 0.08);
+  color: #17231b;
+  text-align: left;
+}
+
+.siteNav {
+  position: relative;
+  width: min(100%, 1320px);
+  min-height: 68px;
+  margin: 0 auto;
+  padding: 0.65rem clamp(1rem, 3vw, 2rem);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: transparent;
+  text-align: left;
+}
+
+.menuLogo {
+  flex: 0 0 auto;
+  min-width: 0;
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: #123d24;
+  text-decoration: none;
+}
+
+.menuLogoMark,
+.menuLogo img {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.menuLogoMark {
+  background: #176f3b;
+  border: 1px solid #176f3b;
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.menuLogoText {
+  font-size: 1.08rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.menuLinks {
+  min-width: 0;
+  margin-left: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.menuLink {
+  position: relative;
+  min-height: 42px;
+  margin: 0;
+  padding: 0.68rem 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: #3f4d44;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.menuLink:hover {
+  background: #edf7f0;
+  color: #135f32;
+}
+
+.menuLink.isActive {
+  background: #e4f4e9;
+  color: #0f6032;
+}
+
+.menuLink.isActive::after {
+  content: "";
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.35rem;
+  left: 0.85rem;
+  height: 2px;
+  background: #178447;
+}
+
+.menuLogo:focus-visible,
+.menuLink:focus-visible,
+.menuToggle:focus-visible {
+  outline: 3px solid #9cdbb2;
+  outline-offset: 3px;
+}
+
+.menuToggle {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  margin-left: auto;
+  padding: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  border: 1px solid #bcd3c3;
+  border-radius: 6px;
+  background: #f5faf6;
+  color: #135f32;
+  cursor: pointer;
+}
+
+.menuToggle span {
+  width: 20px;
+  height: 2px;
+  display: block;
+  background: currentColor;
+  transition:
+    transform 180ms ease,
+    opacity 180ms ease;
+}
+
+.menuToggle.isOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menuToggle.isOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle.isOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 760px) {
+  .siteNav {
+    min-height: 64px;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .menuLogoMark,
+  .menuLogo img {
+    width: 40px;
+    height: 40px;
+    flex-basis: 40px;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+  }
+
+  .menuLinks {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    max-height: 0;
+    margin: 0;
+    padding: 0 clamp(1rem, 4vw, 1.5rem);
+    overflow: hidden auto;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0.25rem;
+    background: #ffffff;
+    border-bottom: 1px solid transparent;
+    box-shadow: 0 14px 24px rgba(19, 55, 33, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      max-height 240ms ease,
+      padding 240ms ease,
+      opacity 180ms ease,
+      visibility 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .menuLinks.isOpen {
+    max-height: min(70vh, 34rem);
+    padding-top: 0.75rem;
+    padding-bottom: 1rem;
+    border-color: #d9e5dc;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menuLink {
+    width: 100%;
+    min-height: 46px;
+    justify-content: flex-start;
+    padding: 0.75rem 0.9rem;
+    white-space: normal;
+  }
+
+  .menuLink.isActive::after {
+    top: 0.65rem;
+    right: auto;
+    bottom: 0.65rem;
+    left: 0.35rem;
+    width: 3px;
+    height: auto;
+  }
+}
+
+@media (max-width: 380px) {
+  .menuLogoText {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menuLink,
+  .menuToggle span,
+  .menuLinks {
+    transition: none;
+  }
+}
+
+
+.menuLogout {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}

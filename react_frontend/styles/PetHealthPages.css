@@ -1,0 +1,220 @@
+.healthPage {
+  --health-primary: #178447;
+  --health-primary-dark: #0f6032;
+  --health-primary-soft: #e8f6ed;
+  --health-surface: #ffffff;
+  --health-text: #19241d;
+  --health-muted: #68746c;
+  --health-border: #d6e3d9;
+  --health-danger: #a92f3a;
+
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  color: var(--health-text);
+}
+
+.healthHeader {
+  width: 100%;
+  margin-bottom: 1.25rem;
+  padding: clamp(1.2rem, 3vw, 1.9rem);
+  background: var(--health-primary-dark);
+  border-left: 6px solid #7ee2a2;
+  border-radius: 8px;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(20, 52, 33, 0.1);
+}
+
+.healthHeader h1 {
+  margin: 0;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.healthPetFilter {
+  width: min(100%, 680px);
+  margin: 0 auto 1.5rem;
+  padding: clamp(1rem, 3vw, 1.4rem);
+  display: grid;
+  grid-template-columns: minmax(100px, 0.3fr) minmax(0, 1fr);
+  gap: 0.8rem 1rem;
+  align-items: center;
+  background: var(--health-surface);
+  border: 1px solid var(--health-border);
+  border-radius: 8px;
+  box-shadow: 0 9px 24px rgba(20, 52, 33, 0.08);
+}
+
+.healthPetFilter label {
+  font-size: 0.9rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.healthPetFilter select {
+  width: 100%;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0.7rem 2rem 0.7rem 0.8rem;
+  border: 1px solid #bdcec2;
+  border-radius: 6px;
+  outline: none;
+  background: #fbfdfb;
+  color: var(--health-text);
+  font: inherit;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.healthPetFilter select:hover {
+  border-color: #88ac94;
+}
+
+.healthPetFilter select:focus {
+  border-color: var(--health-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(23, 132, 71, 0.14);
+}
+
+.healthRecords {
+  padding-bottom: clamp(1.5rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 360px));
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 1.4rem);
+}
+
+.healthRecord {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--health-surface);
+  border: 1px solid var(--health-border);
+  border-top: 3px solid var(--health-primary);
+  border-radius: 8px;
+  box-shadow: 0 9px 24px rgba(20, 52, 33, 0.08);
+}
+
+.healthRecord h2 {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  background: var(--health-primary-soft);
+  border-bottom: 1px solid var(--health-border);
+  color: var(--health-primary-dark);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.healthRecord dl {
+  margin: 0;
+  padding: 0.35rem 1.1rem 1rem;
+}
+
+.healthRecord dl > div {
+  padding: 0.72rem 0;
+  display: grid;
+  grid-template-columns: minmax(105px, 0.42fr) minmax(0, 1fr);
+  gap: 0.8rem;
+  border-bottom: 1px solid #e9f0eb;
+}
+
+.healthRecord dl > div:last-child {
+  border-bottom: 0;
+}
+
+.healthRecord dt {
+  color: var(--health-muted);
+  font-size: 0.77rem;
+  font-weight: 750;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.healthRecord dd {
+  min-width: 0;
+  margin: 0;
+  color: var(--health-text);
+  font-size: 0.9rem;
+  line-height: 1.45;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.healthRecord .healthRecordWide {
+  grid-template-columns: 1fr;
+  gap: 0.3rem;
+}
+
+.healthRecord .healthRecordWide dd {
+  text-align: left;
+}
+
+.healthEmpty,
+.healthError {
+  width: min(100%, 680px);
+  margin: 1.5rem auto;
+  padding: 1rem 1.2rem;
+  border-radius: 8px;
+  background: var(--health-surface);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.healthEmpty {
+  border: 1px solid #b7dbc1;
+  border-left: 4px solid var(--health-primary);
+  color: var(--health-primary-dark);
+}
+
+.healthError {
+  border: 1px solid #eac0c4;
+  border-left: 4px solid var(--health-danger);
+  background: #fff5f6;
+  color: #8c2630;
+}
+
+@media (max-width: 620px) {
+  .healthHeader {
+    padding: 1.1rem;
+  }
+
+  .healthPetFilter {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .healthRecords {
+    grid-template-columns: 1fr;
+  }
+
+  .healthRecord {
+    width: min(100%, 360px);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .healthRecord dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .healthRecord dd {
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .healthPetFilter select {
+    transition: none;
+  }
+}

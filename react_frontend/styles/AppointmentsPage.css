@@ -1,0 +1,287 @@
+.appointmentsSection {
+  --appointments-primary: #178447;
+  --appointments-primary-dark: #0f6032;
+  --appointments-primary-soft: #e7f5eb;
+  --appointments-surface: #ffffff;
+  --appointments-text: #19241d;
+  --appointments-muted: #68746c;
+  --appointments-border: #d8e4db;
+
+  width: min(100%, 1180px);
+  margin: 0 auto;
+  overflow-x: auto;
+  background: var(--appointments-surface);
+  border: 1px solid var(--appointments-border);
+  border-radius: 8px;
+  box-shadow: 0 12px 32px rgba(20, 52, 33, 0.09);
+}
+
+.appointmentsSection table {
+  width: 100%;
+  min-width: 780px;
+  border-collapse: collapse;
+  background: transparent;
+  color: var(--appointments-text);
+}
+
+.appointmentsSection.isAdmin table {
+  min-width: 980px;
+}
+
+.appointmentsSection thead > tr:first-child {
+  background: var(--appointments-primary-dark);
+  color: #ffffff;
+}
+
+.appointmentsSection thead > tr:first-child :is(th, td) {
+  padding: 1rem;
+  border: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.3;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) {
+  transition: background-color 150ms ease;
+}
+
+.appointmentsSection :is(tbody tr, thead > tr:not(:first-child)):hover {
+  background: #f2f8f4;
+}
+
+.appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) td {
+  padding: 0.95rem 1rem;
+  border: 0;
+  border-bottom: 1px solid #e7eee9;
+  color: var(--appointments-text);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) td:first-child {
+  color: var(--appointments-primary-dark);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) td:nth-child(3) {
+  color: var(--appointments-primary-dark);
+  font-weight: 700;
+}
+
+.appointmentsSection tr:last-child td {
+  border-bottom: 0;
+}
+
+.appointmentsSection .errText {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.appointmentsSection .errText td {
+  padding: 2rem;
+  color: var(--appointments-muted);
+  font-size: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .appointmentsSection {
+    overflow: visible;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .appointmentsSection table,
+  .appointmentsSection.isAdmin table,
+  .appointmentsSection thead,
+  .appointmentsSection tbody {
+    min-width: 0;
+    display: block;
+    background: transparent;
+  }
+
+  .appointmentsSection thead > tr:first-child {
+    display: none;
+  }
+
+  .appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) {
+    width: 100%;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    display: grid;
+    background: var(--appointments-surface);
+    border: 1px solid var(--appointments-border);
+    border-top: 3px solid var(--appointments-primary);
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(20, 52, 33, 0.08);
+  }
+
+  .appointmentsSection :is(tbody tr, thead > tr:not(:first-child)):hover {
+    background: var(--appointments-surface);
+  }
+
+  .appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) td {
+    min-width: 0;
+    padding: 0.78rem 1rem;
+    display: grid;
+    grid-template-columns: minmax(105px, 0.45fr) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.8rem;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  .appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) td::before {
+    color: var(--appointments-muted);
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1.35;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .appointmentsSection .appointmentDateCell::before {
+    content: "Időpont";
+  }
+
+  .appointmentsSection .appointmentReasonCell::before {
+    content: "Foglalás oka";
+  }
+
+  .appointmentsSection .appointmentStatusCell::before {
+    content: "Státusz";
+  }
+
+  .appointmentsSection .appointmentOwnerCell::before {
+    content: "Tulajdonos";
+  }
+
+  .appointmentsSection .appointmentPetCell::before {
+    content: "Kisállat";
+  }
+
+  .appointmentsSection .appointmentVeterinarianCell::before {
+    content: "Állatorvos";
+  }
+
+  .appointmentsSection .errText td {
+    display: block;
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .appointmentsSection .errText td::before {
+    content: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .appointmentsSection :is(tbody tr, thead > tr:not(:first-child)) td {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appointmentsSection tr {
+    transition: none;
+  }
+}
+
+
+/*--- Foglalás státusz css*/
+
+.appointmentStatus {
+  width: 100%;
+  min-width: 135px;
+  min-height: 40px;
+  padding: 0.55rem 2rem 0.55rem 0.75rem;
+  border: 1px solid #b7cdbd;
+  border-radius: 6px;
+  outline: none;
+  background-color: #f2f8f4;
+  color: #0f6032;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.3;
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.appointmentStatus:hover {
+  border-color: #178447;
+  background-color: #e8f6ed;
+}
+
+.appointmentStatus:focus {
+  border-color: #178447;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(23, 132, 71, 0.15);
+}
+
+.appointmentStatus:disabled {
+  border-color: #d8e2da;
+  background-color: #edf1ee;
+  color: #89948c;
+  cursor: not-allowed;
+}
+
+.appointmentStatus option {
+  background: #ffffff;
+  color: #19241d;
+  font-weight: 600;
+}
+
+.appointmentStatusBadge {
+  display: inline-flex;
+  min-height: 32px;
+  padding: 0.4rem 0.7rem;
+  align-items: center;
+  border: 1px solid #b7cdbd;
+  border-radius: 6px;
+  background: #f2f8f4;
+  color: var(--appointments-primary-dark);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.appointmentStatusBadge.status-completed {
+  border-color: #99c7a7;
+  background: #e7f5eb;
+}
+
+.appointmentStatusBadge.status-cancelled {
+  border-color: #e3b7bc;
+  background: #fff3f4;
+  color: #9b303a;
+}
+
+@media (max-width: 760px) {
+  .appointmentStatus {
+    width: min(100%, 180px);
+    justify-self: end;
+  }
+}
+
+@media (max-width: 420px) {
+  .appointmentStatus {
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+/*IDÁIG FOGLALÁS SÁTUSZ*/

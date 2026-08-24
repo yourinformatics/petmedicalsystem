@@ -1,0 +1,259 @@
+.adminHealthPage {
+  --admin-primary: #178447;
+  --admin-primary-dark: #0f6032;
+  --admin-primary-soft: #e8f6ed;
+  --admin-surface: #ffffff;
+  --admin-text: #19241d;
+  --admin-muted: #68746c;
+  --admin-border: #d6e3d9;
+  --admin-danger: #a92f3a;
+
+  width: min(100%, 960px);
+  margin: 0 auto;
+  color: var(--admin-text);
+}
+
+.adminHealthHeader {
+  margin-bottom: 1rem;
+  padding: clamp(1.2rem, 3vw, 1.9rem);
+  background: var(--admin-primary-dark);
+  border-left: 6px solid #7ee2a2;
+  border-radius: 8px;
+  color: #ffffff;
+  box-shadow: 0 12px 30px rgba(20, 52, 33, 0.1);
+}
+
+.adminHealthHeader h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.adminHealthTabs {
+  margin-bottom: 1.25rem;
+  padding: 0.35rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  background: #edf3ef;
+  border: 1px solid var(--admin-border);
+  border-radius: 8px;
+}
+
+.adminHealthTabs button {
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--admin-muted);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.adminHealthTabs button:hover {
+  background: #ffffff;
+  color: var(--admin-primary-dark);
+}
+
+.adminHealthTabs button.isActive {
+  border-color: #b8d5c1;
+  background: #ffffff;
+  color: var(--admin-primary-dark);
+  box-shadow: 0 3px 10px rgba(20, 52, 33, 0.08);
+}
+
+.adminHealthTabs button:focus-visible,
+.adminHealthForm :is(input, select, textarea, button):focus-visible {
+  outline: 3px solid #98d9af;
+  outline-offset: 2px;
+}
+
+.adminHealthPanel {
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+
+.adminVaccinationForms {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.adminHealthForm {
+  width: 100%;
+  padding: clamp(1rem, 3vw, 1.6rem);
+  display: grid;
+  grid-template-columns: minmax(135px, 0.32fr) minmax(0, 1fr);
+  gap: 0.85rem 1rem;
+  align-items: center;
+  background: var(--admin-surface);
+  border: 1px solid var(--admin-border);
+  border-top: 3px solid var(--admin-primary);
+  border-radius: 8px;
+  box-shadow: 0 10px 28px rgba(20, 52, 33, 0.09);
+}
+
+.adminHealthForm h2 {
+  grid-column: 1 / -1;
+  margin: 0 0 0.5rem;
+  color: var(--admin-primary-dark);
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.adminHealthForm label {
+  color: var(--admin-text);
+  font-size: 0.86rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.adminHealthForm input,
+.adminHealthForm select,
+.adminHealthForm textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid #bdcec2;
+  border-radius: 6px;
+  outline: none;
+  background: #fbfdfb;
+  color: var(--admin-text);
+  font: inherit;
+  font-size: 0.92rem;
+}
+
+.adminHealthForm textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+
+.adminHealthForm :is(input, select, textarea):focus {
+  border-color: var(--admin-primary);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(23, 132, 71, 0.14);
+}
+
+.adminHealthForm :is(input, select, textarea):disabled {
+  background: #edf1ee;
+  color: #89948c;
+  cursor: not-allowed;
+}
+
+.adminHealthForm button[type="submit"] {
+  grid-column: 1 / -1;
+  justify-self: end;
+  width: min(100%, 240px);
+  min-height: 46px;
+  margin-top: 0.35rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--admin-primary);
+  border-radius: 6px;
+  background: var(--admin-primary);
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 750;
+  cursor: pointer;
+  box-shadow: 0 7px 18px rgba(23, 132, 71, 0.2);
+}
+
+.adminHealthForm button[type="submit"]:hover:not(:disabled) {
+  border-color: var(--admin-primary-dark);
+  background: var(--admin-primary-dark);
+}
+
+.adminHealthForm button[type="submit"]:disabled {
+  border-color: #91aa99;
+  background: #91aa99;
+  box-shadow: none;
+  cursor: wait;
+}
+
+.adminFormError,
+.adminFormSuccess {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 6px;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.adminFormError {
+  border: 1px solid #eac0c4;
+  border-left: 4px solid var(--admin-danger);
+  background: #fff5f6;
+  color: #8c2630;
+}
+
+.adminFormSuccess {
+  border: 1px solid #b7dbc1;
+  border-left: 4px solid var(--admin-primary);
+  background: var(--admin-primary-soft);
+  color: var(--admin-primary-dark);
+}
+
+.adminHealthMessage {
+  width: min(100%, 680px);
+  margin: 2rem auto;
+  padding: 1rem 1.2rem;
+  border: 1px solid #b7dbc1;
+  border-left: 4px solid #178447;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #0f6032;
+  text-align: center;
+}
+
+.adminHealthMessage.isError {
+  border-color: #eac0c4;
+  border-left-color: #a92f3a;
+  background: #fff5f6;
+  color: #8c2630;
+}
+
+@media (max-width: 760px) {
+  .adminVaccinationForms {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .adminHealthHeader {
+    padding: 1.1rem;
+  }
+
+  .adminHealthTabs {
+    grid-template-columns: 1fr;
+  }
+
+  .adminHealthForm {
+    padding: 1rem;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .adminHealthForm h2,
+  .adminFormError,
+  .adminFormSuccess,
+  .adminHealthForm button[type="submit"] {
+    grid-column: 1;
+  }
+
+  .adminHealthForm :is(input, select, textarea) {
+    margin-bottom: 0.6rem;
+  }
+
+  .adminHealthForm button[type="submit"] {
+    width: 100%;
+  }
+}
