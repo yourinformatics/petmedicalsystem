@@ -1,5 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  CalendarDays,
+  CalendarPlus,
+  ClipboardPlus,
+  HeartPulse,
+  PawPrint,
+  ShieldCheck,
+  Stethoscope,
+} from "lucide-react";
 import { getCurrentUser, getPets } from "../../api/api.js";
 import "../../styles/HomePage.css";
 
@@ -9,7 +19,7 @@ function HomePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  // Betölti a felhasználót, normál user esetén pedig a saját állatait.
+  // Betolti a felhasznalot, normal user eseten pedig a sajat allatait.
   useEffect(() => {
     let isActive = true;
 
@@ -19,12 +29,12 @@ function HomePage() {
 
         setCurrentUser(userData);
 
-        // Az admin kezdőlapján nem kérjük le és nem mutatjuk az állatokat.
+        // Az admin kezdolapjan nem kerjuk le es nem mutatjuk az allatokat.
         if (userData.is_staff) {
           return [];
         }
 
-        // A backend normál usernél csak a saját állatokat adja vissza.
+        // A backend normal usernel csak a sajat allatokat adja vissza.
         return getPets();
       })
       .then((petsData) => {
@@ -55,6 +65,7 @@ function HomePage() {
     );
   }
 
+  const isAdmin = Boolean(currentUser?.is_staff);
   const displayName =
     currentUser?.owner?.name ||
     currentUser?.username ||
@@ -63,37 +74,76 @@ function HomePage() {
   return (
     <section className="homePage">
       <header className="homeWelcome">
-        <p>{currentUser?.is_staff ? "Adminisztráció" : "Klinika"}</p>
-        <h1>Üdvözlünk, {displayName}!</h1>
+        <div className="homeWelcomeContent">
+          <p className="homeEyebrow">
+            {isAdmin ? "Klinikai adminisztráció" : "Saját kisállatfiók"}
+          </p>
+          <h1>Üdvözlünk, {displayName}!</h1>
+          <p className="homeWelcomeText">
+            {isAdmin
+              ? "Innen átláthatod a klinika állatait és foglalásait, valamint rögzítheted a kezeléseket, oltásokat és gyógyszereket."
+              : "Itt egy helyen eléred kisállataid adatait, új időpontot foglalhatsz, és követheted az egészségügyi információikat."}
+          </p>
+        </div>
+
+        <div className="homeWelcomeIcon" aria-hidden="true">
+          {isAdmin ? <ShieldCheck /> : <HeartPulse />}
+        </div>
       </header>
 
-      {currentUser?.is_staff ? (
+      {isAdmin ? (
         <section className="homeSection">
           <div className="homeSectionHeading">
-            <h2>Adminisztráció</h2>
+            <div>
+              <p className="homeSectionLabel">Gyors elérés</p>
+              <h2>Adminisztráció</h2>
+            </div>
+            <p>Válassz egy kezelendő területet.</p>
           </div>
 
           <div className="adminHomeGrid">
             <article className="adminHomeCard">
+              <div className="adminHomeCardIcon" aria-hidden="true">
+                <PawPrint />
+              </div>
               <h3>Állatok kezelése</h3>
-              <p>Az összes állat és tulajdonos adatainak kezelése.</p>
-              <Link to="/pets">Állatok megnyitása</Link>
+              <p>Az összes állat és tulajdonos adatainak áttekintése és kezelése.</p>
+              <Link to="/pets">
+                Állatok megnyitása
+                <ArrowRight aria-hidden="true" />
+              </Link>
             </article>
 
             <article className="adminHomeCard">
+              <div className="adminHomeCardIcon" aria-hidden="true">
+                <CalendarDays />
+              </div>
               <h3>Foglalások</h3>
-              <p>Időpontok áttekintése és státuszok módosítása.</p>
-              <Link to="/appointments">Foglalások megnyitása</Link>
+              <p>Időpontok áttekintése, valamint a foglalási státuszok módosítása.</p>
+              <Link to="/appointments">
+                Foglalások megnyitása
+                <ArrowRight aria-hidden="true" />
+              </Link>
             </article>
 
             <article className="adminHomeCard">
+              <div className="adminHomeCardIcon" aria-hidden="true">
+                <ClipboardPlus />
+              </div>
               <h3>Egészségügyi admin</h3>
-              <p>Kezelések, oltások és gyógyszerek rögzítése.</p>
-              <Link to="/admin/health">Admin oldal megnyitása</Link>
+              <p>Kezelések, oltások és felírt gyógyszerek gyors rögzítése.</p>
+              <Link to="/admin/health">
+                Admin oldal megnyitása
+                <ArrowRight aria-hidden="true" />
+              </Link>
             </article>
 
             <article className="adminHomeCard">
+              <div className="adminHomeCardIcon" aria-hidden="true">
+                <Stethoscope />
+              </div>
               <h3>Egészségügyi adatok</h3>
+              <p>A klinikai előzmények gyors megnyitása kategóriánként.</p>
               <div className="adminHomeLinks">
                 <Link to="/vaccinations">Oltások</Link>
                 <Link to="/medical-records">Kezelések</Link>
@@ -105,29 +155,40 @@ function HomePage() {
       ) : (
         <section className="homeSection">
           <div className="homeSectionHeading">
-            <h2>Állataim</h2>
+            <div>
+              <p className="homeSectionLabel">Saját profil</p>
+              <h2>Állataim</h2>
+            </div>
+
             {pets.length > 0 && (
               <Link className="homeSecondaryLink" to="/pets">
                 Állatok kezelése
+                <ArrowRight aria-hidden="true" />
               </Link>
             )}
           </div>
 
           {pets.length === 0 ? (
             <div className="homeEmptyState">
+              <div className="homeEmptyIcon" aria-hidden="true">
+                <PawPrint />
+              </div>
               <h2>Még nincs rögzített állatod</h2>
-              <p>Az első időpontfoglalás előtt add hozzá a kisállatodat.</p>
-              <Link to="/pets">Állat hozzáadása</Link>
+              <p>
+                Add hozzá kisállatodat, hogy időpontot foglalhass és elérhesd
+                az egészségügyi adatait.
+              </p>
+              <Link to="/pets">
+                Állat hozzáadása
+                <ArrowRight aria-hidden="true" />
+              </Link>
             </div>
           ) : (
             <div className="homePetsGrid">
               {pets.map((pet) => (
                 <article className="homePetCard" key={pet.id}>
                   {pet.image ? (
-                    <img
-                      src={pet.image}
-                      alt={`${pet.name} képe`}
-                    />
+                    <img src={pet.image} alt={`${pet.name} képe`} />
                   ) : (
                     <div className="homePetPlaceholder" aria-hidden="true">
                       {pet.name.charAt(0).toUpperCase()}
@@ -155,6 +216,7 @@ function HomePage() {
                     </dl>
 
                     <Link to={`/appointments/new?pet=${pet.id}`}>
+                      <CalendarPlus aria-hidden="true" />
                       Időpont foglalása
                     </Link>
                   </div>

@@ -9,25 +9,6 @@ body {
     background: #f4f6f8;
 }
 
-header {
-    background: #2e7d32;
-    color: white;
-    padding: 20px;
-    text-align: center;
-}
-
-nav {
-    background: #1b5e20;
-    padding: 10px;
-    text-align: center;
-}
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-}
-
 main {
     padding: 20px;
 }

@@ -101,8 +101,11 @@ function AppMain() {
   <header className="siteHeader">
         <nav className="siteNav" aria-label="Fő navigáció">
           <Link className="menuLogo" to="/" onClick={closeMenu} aria-label="Klinika kezdőlap">
-            <span className="menuLogoMark" aria-hidden="true">K</span>
-            <span className="menuLogoText">Klinika</span>
+            <img
+              className="menuLogoImage"
+              src="/klinika-logo.png"
+              alt="Klinika"
+            />
           </Link>
 
           <button
