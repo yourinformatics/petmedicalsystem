@@ -14,7 +14,7 @@
 }
 
 .homeWelcome {
-  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: clamp(1.5rem, 4vw, 1.5rem);
   padding: clamp(1.3rem, 4vw, 2.2rem);
   background: var(--home-primary-dark);
   border-left: 6px solid #7ee2a2;
@@ -317,7 +317,12 @@
 }
 
 @media (max-width: 380px) {
-  .homePetContent dl div {
+
+    .homeWelcome h1 {
+    font-size: clamp(1.2rem, 4vw, 2.2rem);
+    }
+
+    .homePetContent dl div {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.2rem;
@@ -326,4 +331,6 @@
   .homePetContent dd {
     text-align: left;
   }
+
+
 }

@@ -46,6 +46,11 @@ function AppointmentsForm({ onCreated }) {
 
   // Egyszerre tölti be a legördülő listák és a foglaltság adatait.
   useEffect(() => {
+
+  const requestedPetId = new URLSearchParams(
+    window.location.search
+  ).get("pet");
+
     Promise.all([
       getCurrentUser(),
       getOwners(),
@@ -69,10 +74,26 @@ function AppointmentsForm({ onCreated }) {
         setAppointments(
           Array.isArray(appointmentsData) ? appointmentsData : [],
         );
+
+
+        // Url-ből olvasás a PET id beemelése miatt itt történik meg.
+
+        
+        const pets = Array.isArray(petsData) ? petsData : [];
+
+        const requestedPetExists = pets.some(
+          (pet) => String(pet.id) === requestedPetId
+        );
+
         setForm((previous) => ({
           ...previous,
-          owner: userData.is_staff ? "" : String(userData.owner?.id ?? ""),
+          owner: userData.is_staff
+            ? ""
+            : String(userData.owner?.id ?? ""),
+          pet: requestedPetExists ? requestedPetId : "",
         }));
+
+
       })
       .catch((err) => setError(err.message));
   }, []);
@@ -82,7 +103,6 @@ function AppointmentsForm({ onCreated }) {
     ? pets.filter((pet) => Number(pet.owner) === Number(form.owner))
     : pets;
 
-  // Egy közös függvény kezeli az összes űrlapmező változását.
   function handleChange(event) {
     const { name, value } = event.target;
 

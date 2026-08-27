@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  getOwners,
   getPets,
   getPrescriptions,
 } from "../../api/api.js";
@@ -18,7 +17,6 @@ function formatDate(value) {
 
 function PrescriptionsPage() {
   const [pets, setPets] = useState([]);
-  const [owners, setOwners] = useState([]);
   const [selectedPet, setSelectedPet] = useState("");
   const [prescriptions, setPrescriptions] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,11 +25,11 @@ function PrescriptionsPage() {
   useEffect(() => {
     let isActive = true;
 
-    Promise.all([getPets(), getOwners()])
-      .then(([petsData, ownersData]) => {
+    getPets()
+      .then((petsData) => {
         if (!isActive) return;
+
         setPets(Array.isArray(petsData) ? petsData : []);
-        setOwners(Array.isArray(ownersData) ? ownersData : []);
       })
       .catch((err) => {
         if (isActive) setError(err.message);
@@ -41,11 +39,6 @@ function PrescriptionsPage() {
       isActive = false;
     };
   }, []);
-
-  function getPetLabel(pet) {
-    const owner = owners.find((item) => item.id === pet.owner);
-    return owner ? `${pet.name} - ${owner.name}` : pet.name;
-  }
 
   async function handlePetChange(event) {
     const petId = event.target.value;
@@ -82,7 +75,7 @@ function PrescriptionsPage() {
           <option value="">Válassz kisállatot</option>
           {pets.map((pet) => (
             <option key={pet.id} value={pet.id}>
-              {getPetLabel(pet)} - {pet.chip_number}
+              {pet.name} - {pet.chip_number}
             </option>
           ))}
         </select>
