@@ -294,3 +294,36 @@
   outline-offset: 3px;
 }
 
+@media (max-width: 620px) {
+  .homeWelcome {
+    padding: 1.15rem;
+  }
+
+  .homeSectionHeading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .homePetsGrid,
+  .adminHomeGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .homePetCard {
+    width: min(100%, 340px);
+    justify-self: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .homePetContent dl div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .homePetContent dd {
+    text-align: left;
+  }
+}
