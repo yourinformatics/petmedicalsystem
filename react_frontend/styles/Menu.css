@@ -19,10 +19,10 @@
 
 .siteNav {
   position: relative;
-  width: min(100%, 1720px);
+  width: min(100%, 1640px);
   min-height: 72px;
   margin: 0 auto;
-  padding: 0.65rem clamp(1rem, 2.5vw, 2rem);
+  padding: 0.65rem clamp(1.25rem, 3vw, 2.5rem);
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
@@ -118,18 +118,23 @@
 
 .menuLogout {
   margin-left: auto;
-  padding-left: 0.9rem;
-  border: 0;
-  border-left: 1px solid #d9e5dc;
-  background: transparent;
-  color: #526057;
+  padding-right: 0.8rem;
+  padding-left: 0.8rem;
+  border: 1px solid #e5b8bd;
+  background: #fff2f3;
+  color: #982f3a;
   font: inherit;
   cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
 }
 
 .menuLogout:hover {
-  background: #fff3f3;
-  color: #8b2f38;
+  border-color: #a92f3a;
+  background: #a92f3a;
+  color: #ffffff;
 }
 
 .menuLogo:focus-visible,
@@ -252,8 +257,8 @@
   .menuLogout {
     margin-left: 0;
     padding-left: 0.9rem;
-    border-left: 0;
-    color: #8b2f38;
+    border: 1px solid #e5b8bd;
+    color: #982f3a;
   }
 }
 
