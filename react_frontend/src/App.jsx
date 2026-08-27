@@ -1,4 +1,21 @@
 import { useEffect, useState } from 'react'
+
+//Lucide ikonok beemelése
+import {
+  House,
+  CalendarPlus,
+  PawPrint,
+  CalendarDays,
+  Syringe,
+  Stethoscope,
+  Pill,
+  ShieldCheck,
+  LogOut,
+  Menu,
+  X,
+} from "lucide-react";
+// ----------------
+
 import {
   Routes,
   Route,
@@ -89,16 +106,18 @@ function AppMain() {
           </Link>
 
           <button
-            className={`menuToggle${menuOpen ? ' isOpen' : ''}`}
+            className={`menuToggle${menuOpen ? " isOpen" : ""}`}
             type="button"
-            aria-label={menuOpen ? 'Menü bezárása' : 'Menü megnyitása'}
+            aria-label={menuOpen ? "Menü bezárása" : "Menü megnyitása"}
             aria-expanded={menuOpen}
             aria-controls="primaryNavigation"
             onClick={() => setMenuOpen((open) => !open)}
           >
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
-            <span aria-hidden="true" />
+            {menuOpen ? (
+              <X size={24} strokeWidth={2} aria-hidden="true" />
+            ) : (
+              <Menu size={24} strokeWidth={2} aria-hidden="true" />
+            )}
           </button>
 
           <div
@@ -106,27 +125,37 @@ function AppMain() {
             id="primaryNavigation"
           >
             <NavLink
-              className={({ isActive }) => `menuLink${isActive ? ' isActive' : ''}`}
               to="/"
+              end
+              className={({ isActive }) =>
+                `menuLink${isActive ? " isActive" : ""}`
+              }
               onClick={closeMenu}
             >
-              Kezdőlap
+              <House size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Kezdőlap</span>
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => `menuLink${isActive ? ' isActive' : ""}`}
               to="/appointments/new"
+              className={({ isActive }) =>
+                `menuLink${isActive ? " isActive" : ""}`
+              }
               onClick={closeMenu}
             >
-              Időpont foglalás
+              <CalendarPlus size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Foglalás</span>
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => `menuLink${isActive ? ' isActive' : ''}`}
               to="/pets"
+              className={({ isActive }) =>
+                `menuLink${isActive ? " isActive" : ""}`
+              }
               onClick={closeMenu}
             >
-              Állataim
+              <PawPrint size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Állataim</span>
             </NavLink>
 
             <NavLink
@@ -137,40 +166,53 @@ function AppMain() {
               }
               onClick={closeMenu}
             >
-              Foglalások
+              <CalendarDays size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Foglalások</span>
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => `menuLink${isActive ? ' isActive' : ''}`}
               to="/vaccinations"
+              className={({ isActive }) =>
+                `menuLink${isActive ? " isActive" : ""}`
+              }
               onClick={closeMenu}
             >
-              Oltások
+              <Syringe size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Oltások</span>
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => `menuLink${isActive ? ' isActive' : ''}`}
               to="/medical-records"
+              className={({ isActive }) =>
+                `menuLink${isActive ? " isActive" : ""}`
+              }
               onClick={closeMenu}
             >
-              Kezelések
+              <Stethoscope size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Kezelések</span>
             </NavLink>
 
             <NavLink
-              className={({ isActive }) => `menuLink${isActive ? ' isActive' : ''}`}
               to="/prescriptions"
+              className={({ isActive }) =>
+                `menuLink${isActive ? " isActive" : ""}`
+              }
               onClick={closeMenu}
             >
-              Gyógyszerek
+              <Pill size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Gyógyszerek</span>
             </NavLink>
 
             {currentUser?.is_staff && (
               <NavLink
-                className={({ isActive }) => `menuLink${isActive ? ' isActive' : ''}`}
                 to="/admin/health"
+                className={({ isActive }) =>
+                  `menuLink${isActive ? " isActive" : ""}`
+                }
                 onClick={closeMenu}
               >
-                Admin
+                <ShieldCheck size={18} strokeWidth={2} aria-hidden="true" />
+                <span>Admin</span>
               </NavLink>
             )}
 
@@ -179,7 +221,8 @@ function AppMain() {
               className="menuLink menuLogout"
               onClick={handleLogout}
             >
-              Kijelentkezés
+              <LogOut size={18} strokeWidth={2} aria-hidden="true" />
+              <span>Kilépés</span>
             </button>
             
           </div>

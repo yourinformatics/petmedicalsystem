@@ -88,9 +88,22 @@
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;
+  gap: 0.45rem;
   transition:
     background-color 160ms ease,
     color 160ms ease;
+}
+
+.menuLink svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.menuToggle svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
 }
 
 .menuLink:hover {
@@ -121,14 +134,14 @@
 }
 
 .menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 44px;
   height: 44px;
   flex: 0 0 44px;
   margin-left: auto;
   padding: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   gap: 5px;
   border: 1px solid #bcd3c3;
@@ -136,28 +149,6 @@
   background: #f5faf6;
   color: #135f32;
   cursor: pointer;
-}
-
-.menuToggle span {
-  width: 20px;
-  height: 2px;
-  display: block;
-  background: currentColor;
-  transition:
-    transform 180ms ease,
-    opacity 180ms ease;
-}
-
-.menuToggle.isOpen span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
-
-.menuToggle.isOpen span:nth-child(2) {
-  opacity: 0;
-}
-
-.menuToggle.isOpen span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
 }
 
 @media (max-width: 760px) {
