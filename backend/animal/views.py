@@ -8,6 +8,8 @@ from rest_framework.permissions import AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 
@@ -280,19 +282,19 @@ class PrescriptionViewSet(viewsets.ModelViewSet):
         )
 
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.permissions import IsAuthenticated
-from rest_framework_simplejwt.tokens import RefreshToken
-
-
 class LogoutView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
-            refresh_token = request.data["refresh"]
+            refresh_token = (
+                request.data.get("refresh")
+                if isinstance(request.data, dict)
+                else None
+            )
+            if not isinstance(refresh_token, str) or not refresh_token:
+                raise TokenError("Invalid refresh token")
+
             token = RefreshToken(refresh_token)
             token.blacklist()
 
@@ -301,7 +303,7 @@ class LogoutView(APIView):
                 status=status.HTTP_205_RESET_CONTENT
             )
 
-        except Exception:
+        except TokenError:
             return Response(
                 {"error": "Érvénytelen token."},
                 status=status.HTTP_400_BAD_REQUEST

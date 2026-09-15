@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from datetime import date, timedelta
+from unittest.mock import patch
 from .models import (
     Owner,
     Pet,
@@ -131,6 +132,108 @@ class PrescriptionTest(TestCase):
 
 from rest_framework.test import APITestCase
 from rest_framework import status
+from rest_framework_simplejwt.tokens import RefreshToken
+
+
+class LogoutApiTest(APITestCase):
+
+    @classmethod
+    def setUpTestData(cls):
+        cls.credentials = {
+            "username": "logout_user",
+            "password": "TestPassword123!",
+        }
+        get_user_model().objects.create_user(**cls.credentials)
+
+    def setUp(self):
+        response = self.client.post(
+            "/api/login/", self.credentials, format="json"
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.access = response.data["access"]
+        self.refresh = response.data["refresh"]
+        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {self.access}")
+
+    def test_logout_revokes_only_the_supplied_refresh_token(self):
+        other_login = self.client.post(
+            "/api/login/", self.credentials, format="json"
+        )
+        self.assertEqual(other_login.status_code, status.HTTP_200_OK)
+
+        response = self.client.post(
+            "/api/logout/", {"refresh": self.refresh}, format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_205_RESET_CONTENT)
+        rejected_refresh = self.client.post(
+            "/api/token/refresh/", {"refresh": self.refresh}, format="json"
+        )
+        self.assertEqual(
+            rejected_refresh.status_code, status.HTTP_401_UNAUTHORIZED
+        )
+        other_refresh = self.client.post(
+            "/api/token/refresh/",
+            {"refresh": other_login.data["refresh"]},
+            format="json"
+        )
+        self.assertEqual(other_refresh.status_code, status.HTTP_200_OK)
+        self.assertIn("access", other_refresh.data)
+
+    def test_logout_rejects_missing_or_invalid_refresh_tokens(self):
+        payloads = [{}] + [
+            {"refresh": value}
+            for value in (None, "", 123, False, [], {}, "invalid", self.access)
+        ]
+        for payload in payloads:
+            with self.subTest(payload=payload):
+                response = self.client.post(
+                    "/api/logout/", payload, format="json"
+                )
+
+                self.assertEqual(
+                    response.status_code, status.HTTP_400_BAD_REQUEST
+                )
+                self.assertEqual(response.data, {"error": "Érvénytelen token."})
+
+    def test_logout_rejects_expired_refresh_tokens(self):
+        token = RefreshToken(self.refresh)
+        token.set_exp(lifetime=timedelta(seconds=-1))
+
+        response = self.client.post(
+            "/api/logout/", {"refresh": str(token)}, format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data, {"error": "Érvénytelen token."})
+
+    def test_logout_rejects_already_blacklisted_refresh_tokens(self):
+        RefreshToken(self.refresh).blacklist()
+
+        response = self.client.post(
+            "/api/logout/", {"refresh": self.refresh}, format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+        self.assertEqual(response.data, {"error": "Érvénytelen token."})
+
+    def test_logout_requires_authentication(self):
+        self.client.credentials()
+
+        response = self.client.post(
+            "/api/logout/", {"refresh": self.refresh}, format="json"
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_logout_does_not_hide_unexpected_errors_as_invalid_tokens(self):
+        with patch(
+            "animal.views.RefreshToken.blacklist",
+            side_effect=RuntimeError("Blacklist unavailable")
+        ):
+            with self.assertRaisesMessage(RuntimeError, "Blacklist unavailable"):
+                self.client.post(
+                    "/api/logout/", {"refresh": self.refresh}, format="json"
+                )
 
 
 class PetApiTest(APITestCase):
